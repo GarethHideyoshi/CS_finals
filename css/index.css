@@ -17,6 +17,8 @@ html, body {
 }
 
 .section {
+  margin-top: 0;
+  margin-bottom: 0;
   height: 100vh;
   width: 100vw;
   scroll-snap-align: start;
