@@ -49,8 +49,8 @@
 .border-front-top{
     position: fixed;
     z-index: 5;
-    width: 110vw;
-    height: calc(9.9vh + 3px);
+    width: 200vw;
+    height: calc(8.9vh + 3px);
     top: 0;
     transform: translateX(-5vw);
 
@@ -68,15 +68,15 @@
 );
 
 
-opacity: 0.5;
+
 }
 
 
 .border-front-bot{
     position: fixed;
     z-index: 5;
-    width: 110vw;
-    height: 9.9vh;
+    width: 200vw;
+    height: calc(8.9vh + 3px);
     bottom: 0;
     transform: translateX(-5vw);
 
