@@ -58,18 +58,7 @@ body{
     width: 50%;
 }
 
-.header{
-    position: fixed;
-    top: 0;
-    z-index: 10;
 
-    height: 6vh;
-    width: 100%;
-    
-    background-color: gray;
-    border: 1px solid black;
-    border-radius: 0px;
-}
 
 /* SECTION 1 */
 
@@ -299,6 +288,14 @@ body{
     background-size: 150%;
     background-size: cover;
 } 
+
+.img4{
+    background-image: url(../img/py-limbo-bg.png);
+    background-position: center;
+    background-size: 100%;
+    background-size: cover;
+
+}
 
 
 /* end of images */
