@@ -1,3 +1,9 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 .news-container {
   grid-area: 2 / 2 / 3 / 7;
   height: 90%;
@@ -24,7 +30,7 @@
   border-radius: 3px;
 }
 .imgnews {
-  background-image: url(../img/abyss.jpg);
+  background-image: url(../img/py-limbo-bg.png);
   background-position: center;
   background-size: 100%;
   background-size: cover;

@@ -1,3 +1,9 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 .faq-container {
   grid-area: 2 / 2 / 3 / 7;
   height: 85%;
@@ -54,7 +60,7 @@
   list-style: none;
 }
 .imgfaq {
-  background-image: url(../img/seek.jpg);
+  background-image: url(../img/py-limbo-bg.png);
   background-position: center;
   background-size: 100%;
   background-size: cover;
