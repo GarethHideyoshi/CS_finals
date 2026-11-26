@@ -1,4 +1,3 @@
-
 const menu1 = document.getElementById("menu1");
 const menu2 = document.getElementById("menu2");
 const menu3 = document.getElementById("menu3");
@@ -20,6 +19,13 @@ const texts = {
 
 const iSpeed = 20;
 let typeTimer = null;
+
+const menus = [menu1, menu2, menu3];
+
+// Marks which panel is active (1-3), or none (0), so CSS can style it.
+function setActive(n) {
+    menus.forEach((m, i) => m.classList.toggle("is-active", i === n - 1));
+}
 
 // Types `text` into the destination. Tags like <br> are inserted whole,
 // so they never flash as half-written characters.
@@ -60,6 +66,7 @@ function activate1() {
         "calc(300% - 35px)", "left",
         "calc(300% - 75px)", "left"
     );
+    setActive(1);
     typewriter(texts[1]);
 }
 
@@ -69,6 +76,7 @@ function activate2() {
         "calc(-100% + 35px)", "right",
         "calc(300% - 35px)", "left"
     );
+    setActive(2);
     typewriter(texts[2]);
 }
 
@@ -78,6 +86,7 @@ function activate3() {
         "calc(300% - 35px)", "left",
         "calc(-100% + 35px)", "right"
     );
+    setActive(3);
     typewriter(texts[3]);
 }
 
@@ -87,6 +96,7 @@ function back() {
         "calc(100%)", "left",
         "calc(200%)", "left"
     );
+    setActive(0);
     typewriter(defaultText);
 }
 

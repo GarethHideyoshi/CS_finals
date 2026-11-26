@@ -95,7 +95,7 @@
     z-index: 2;
     transition-duration: 1s;
     grid-area: 1 / 1 / 1 / 1;
-    background-color: aqua;
+    
     border: 1px solid var(--color1);
 
     background-image: url(../img/shopp.png);
@@ -114,7 +114,7 @@
     grid-area: 1 / 1 / 1 / 1;
     transform: translateX(var(--pos-s2));
     
-    background-color: rgb(154, 37, 154);
+    
     border: 1px solid var(--color1);
 
     background-image: url(../img/skill.png);
@@ -133,74 +133,53 @@
     
 
     grid-area: 1 / 1 / 1 / 1;
-    background-color: rgb(37, 154, 62);
+    
     border: 1px solid var(--color1);
     background-image: url(../img/merc.png);
     background-position: center;
     background-size: cover;
 
 }
+/* labels: exactly the width of the visible strip (35px), so they never clip */
+.splice1-text,
+.splice2-text,
+.splice3-text {
+  position: relative;
+  z-index: 2;
+  box-sizing: border-box;
 
-.splice1-text{
-    float: var(--f-st1);
-    transition-duration: 1s;
-    
-    /* grid-area: 1 / 1 / 1 / 1; */
-    width: 0.01vw;
-    /* transform: translateX(var(--j-st1)); */
-    margin-right: 35px;
+  width: 35px;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.splice1-text > p{
-    margin-left: 5px;
-    
-    word-wrap: break-word;
+/* world.js still decides the side through these variables */
+.splice1-text { float: var(--f-st1); --glow: rgba(53, 46, 50, 0.6); }
+.splice2-text { float: var(--f-st2); --glow: rgba(236, 72, 153, 0.6); }
+.splice3-text { float: var(--f-st3); --glow: rgba(236, 72, 153, 0.6); }
 
-    text-shadow: 0 0 5px rgba(255, 255, 255, 1),
-                0 0 10px rgba(255, 174, 0, 1),
-                0 0 20px rgba(53, 46, 50, 0.6);
-    color: #ffffff;
-    font-family: Georgia, "Times New Roman", serif;
-}
+.splice1-text > p,
+.splice2-text > p,
+.splice3-text > p {
+  margin: 0;
+  padding: 0;
+  line-height: 1;
 
-.splice2-text{
-    position: relative;
-    z-index: 4;
-    float: var(--f-st2);
-    transition-duration: 1s;
-    
-    /* grid-area: 1 / 1 / 1 / 1; */
-    width: 0.01vw;
-    /* transform: translateX(var(--j-st1)); */
-    margin-right: 35px;
-}
-.splice2-text > p{
-    margin-left: 5px;
-    word-wrap: break-word;
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+  letter-spacing: 0.15em;
+  font-size: clamp(0.8rem, 1.5vw, 1.3rem); /* max ~21px, fits the 35px strip */
 
-    text-shadow: 0 0 5px rgba(255, 255, 255, 1),
-                0 0 10px rgba(255, 174, 0, 1),
-                0 0 20px rgba(236, 72, 153, 0.6);
-    color: #ffffff;
-    font-family: Georgia, "Times New Roman", serif;
-
-}
-.splice3-text{
-    position: relative;
-    z-index: 3;
-    float: var(--f-st3);
-    width: 0.01vw;
-    margin-right: 35px;
-}
-.splice3-text > p{
-    margin-left: 5px;
-    word-wrap: break-word;
-
-    text-shadow: 0 0 5px rgba(255, 255, 255, 1),
-                0 0 10px rgba(255, 174, 0, 1),
-                0 0 20px rgba(236, 72, 153, 0.6);
-    color: #ffffff;
-    font-family: Georgia, "Times New Roman", serif;
+  font-family: Georgia, "Times New Roman", serif;
+  color: #ffffff;
+  text-shadow: 0 0 5px rgba(255, 255, 255, 1),
+               0 0 10px rgba(255, 174, 0, 1),
+               0 0 20px var(--glow);
 }
 
 

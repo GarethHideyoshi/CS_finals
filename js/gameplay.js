@@ -36,7 +36,7 @@ function Right(){
 
 const titleText = {
     1: "START AN OFFICE",
-    2: "SELECT A COMMISION",
+    2: "SELECT A REQUEST",
     3: "A JOB TO DO"
 };
 
@@ -126,7 +126,7 @@ function typewriter2(text) {
 }
 
 const destination3 = document.getElementById("destination-desc");
-const iSpeed3 = 20;
+const iSpeed3 = 50;
 let typeTimer3 = null;
 
 function typewriter3(text) {

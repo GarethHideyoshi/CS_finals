@@ -1,0 +1,503 @@
+/* ---------- footer ---------- */
+#footer-sect { min-height: 100vh; }
+
+.footer-inner {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5vw;
+}
+
+/* orange band between the two fixed borders */
+.footer-line {
+  --band-gap: 2.5vh;
+
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: calc(var(--bar-full) + var(--band-gap));
+  bottom: calc(var(--bar-full) + var(--band-gap));
+  z-index: 1;
+  pointer-events: none;
+
+  background-color: var(--color1);
+  box-shadow: 0 0 60px 0 var(--black) inset;
+
+  /* hidden state, also the exit: shrinks away toward the right */
+  transform: scaleX(0);
+  transform-origin: right center;
+  transition: transform 0.6s cubic-bezier(0.77, 0, 0.18, 1) 0s;
+}
+
+/* entering: grows in from the left after the borders have mostly closed */
+body.footer-focus .footer-line {
+  transform: scaleX(1);
+  transform-origin: left center;
+  transition: transform 1s cubic-bezier(0.77, 0, 0.18, 1) 0.9s;
+}
+
+/* the 3 divs: hidden until the line is done */
+.icon-box,
+.footer-text {
+  position: relative;
+  z-index: 2;
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+.icon-box {
+  height: 15vh;
+  aspect-ratio: 1 / 1;
+  border: 2px solid var(--purple);
+  border-radius: 10%;
+  background-color: var(--purple);
+  box-shadow: 0 0 30px 0 var(--black) inset;
+}
+
+.icon-1 { background-image: url("../img/Purgatorio-Wiki-Icon.webp"); }
+.icon-2 { background-image: url("../img/roblox-orange.jpg"); }
+
+.icon-1,
+.icon-2 {
+  background-size: cover;      /* fills the box; use "contain" to show the whole image */
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* clickable icons */
+a.icon-box {
+  display: block;
+  text-decoration: none;
+  cursor: pointer;
+
+  /* the global * { transition-duration: 1s } is too slow for hover */
+  transition: scale 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+/* hover: zoom in like Google Images */
+a.icon-box:hover,
+a.icon-box:focus-visible {
+  scale: 1.12;
+  z-index: 3; /* sits above the neighbors while zoomed */
+  border-color: var(--white);
+  box-shadow: 0 0 30px 0 var(--black) inset, 0 8px 30px rgba(0, 0, 0, 0.7);
+  outline: none;
+}
+
+a.icon-box:active {
+  scale: 1.05;
+}
+
+.footer-text > p{
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.2),
+               0 0 20px rgb(0, 0, 0),
+               0 0 20px rgba(0, 0, 0, 0.6);
+  color: #ffffff;
+  font-family: "Arial Black", Gadget, sans-serif;
+  font-size: 3vw;
+  font-weight: 900;
+}
+
+body.footer-focus .footer-inner > :nth-child(1) { animation: footer-up 0.8s ease-out 1.9s both; }
+body.footer-focus .footer-inner > :nth-child(2) { animation: footer-up 0.8s ease-out 2.1s both; }
+body.footer-focus .footer-inner > :nth-child(3) { animation: footer-up 0.8s ease-out 2.3s both; }
+
+@keyframes footer-up {
+  from { opacity: 0; transform: translateY(40px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- page-text sheen (slides 2 and 3) ---------- */
+.page-text,
+.page-text2 {
+  position: relative;
+  overflow: hidden;
+}
+
+.page-text p,
+.page-text2 p { opacity: 0; }
+
+.page-text::after,
+.page-text2::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    rgba(185, 122, 42, 0) 0%,
+    rgba(185, 122, 42, 0.9) 60%,
+    rgba(185, 122, 42, 0) 100%
+  );
+  transform: translateX(-100%);
+}
+
+.section.in-view .page-text::after,
+.section.in-view .page-text2::after {
+  animation: sheen 1.2s ease-in-out forwards;
+}
+
+.section.in-view .page-text p,
+.section.in-view .page-text2 p {
+  animation: fade-in 0.6s ease-out 0.5s forwards;
+}
+
+@keyframes sheen   { to { transform: translateX(100%); } }
+@keyframes fade-in { to { opacity: 1; } }
+
+/* ---------- slide 2: text (hidden, then rises + fades in) ---------- */
+.Main-topic,
+.gameplay-text { overflow: hidden; }
+
+.section .Main-topic p,
+.section .gameplay-text p {
+  opacity: 0;
+  transform: translateY(150%);
+}
+
+.section.in-view .Main-topic p,
+.section.in-view .gameplay-text p {
+  animation: rise 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) 0.4s both;
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(150%); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- slide 2: sliding cover over video + image ---------- */
+.gameplay-video-container,
+.gameplay-image {  }
+
+.video-inner,
+.gameplay-image-inner { position: relative; }
+
+.media-cover {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background-color: var(--color1);
+  pointer-events: none;
+}
+
+/* first view: wipes away from the left */
+.section.in-view .media-cover {
+  animation: cover-wipe 1.2s cubic-bezier(0.77, 0, 0.18, 1) 0.6s both;
+}
+
+/* ---------- slide 3: panels dealt in, glint, neon labels ---------- */
+.splice1 { --d: 0.2s; }
+.splice2 { --d: 0.5s; }
+.splice3 { --d: 0.8s; }
+
+/* hidden while the slide is out of view */
+.section:not(.in-view) .splice1,
+.section:not(.in-view) .splice2,
+.section:not(.in-view) .splice3 {
+  clip-path: inset(100% 0 0 0);
+}
+
+.section.in-view .splice1,
+.section.in-view .splice2,
+.section.in-view .splice3 {
+  animation: panel-deal 0.9s cubic-bezier(0.77, 0, 0.18, 1) var(--d) backwards;
+}
+
+@keyframes panel-deal {
+  from { clip-path: inset(100% 0 0 0); filter: brightness(3); }
+  60%  { filter: brightness(1.8); }
+  to   { clip-path: inset(0 0 0 0);    filter: brightness(1); }
+}
+
+/* light glint sweeping left to right once the panel has landed */
+.splice1::after,
+.splice2::after,
+.splice3::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background-image: linear-gradient(
+    105deg,
+    transparent 40%,
+    rgba(255, 214, 150, 0.6) 50%,
+    transparent 60%
+  );
+  background-size: 300% 100%;
+  background-repeat: no-repeat;
+  background-position: 100% 0;
+}
+
+.section.in-view .splice1::after,
+.section.in-view .splice2::after,
+.section.in-view .splice3::after {
+  animation: glint 1.1s ease-in-out calc(var(--d) + 0.8s) backwards;
+}
+
+@keyframes glint {
+  from { background-position: 100% 0; }
+  to   { background-position: 0% 0; }
+}
+
+/* labels flicker on letter by letter (spans are added by reveal.js) */
+.neon-letter { display: inline-block; }
+
+.section:not(.in-view) .neon-letter { opacity: 0; }
+
+.section.in-view .neon-letter {
+  animation: neon-on 0.9s linear calc(var(--d) + 1.1s + var(--i) * 0.09s) backwards;
+}
+
+@keyframes neon-on {
+  0%   { opacity: 0; }
+  12%  { opacity: 1; }
+  20%  { opacity: 0.15; }
+  32%  { opacity: 1; }
+  44%  { opacity: 0.35; }
+  60%  { opacity: 1; text-shadow: 0 0 12px #fff, 0 0 28px var(--color1); }
+  100% { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section:not(.in-view) .splice1,
+  .section:not(.in-view) .splice2,
+  .section:not(.in-view) .splice3 { clip-path: none; }
+  .section .neon-letter { opacity: 1; animation: none !important; }
+  .splice1::after, .splice2::after, .splice3::after { display: none; }
+}
+
+@keyframes cover-wipe {
+  from { clip-path: inset(0 0 0 0); }
+  to   { clip-path: inset(0 0 0 100%); }
+}
+
+/* after left/right press: enters from the right, holds, wipes away from the left */
+.section.in-view.cover-return .media-cover {
+  animation: cover-return 2s both;
+}
+
+@keyframes cover-return {
+  0%   { clip-path: inset(0 0 0 100%); animation-timing-function: cubic-bezier(0.77, 0, 0.18, 1); }
+  35%  { clip-path: inset(0 0 0 0); }
+  50%  { clip-path: inset(0 0 0 0); animation-timing-function: cubic-bezier(0.77, 0, 0.18, 1); }
+  100% { clip-path: inset(0 0 0 100%); }
+}
+
+/* ---------- slide 3: activated panel effect ---------- */
+
+/* overlay layer on every panel (off by default) */
+.splice1::before,
+.splice2::before,
+.splice3::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+/* active panel: entry flash, then a pulsing edge glow and a sweeping beam */
+.splice1.is-active::before,
+.splice2.is-active::before,
+.splice3.is-active::before {
+  opacity: 1;
+
+  background-color: transparent;
+  background-image: linear-gradient(
+    105deg,
+    transparent 40%,
+    rgba(255, 214, 150, 0.45) 50%,
+    transparent 60%
+  );
+  background-size: 300% 100%;
+  background-repeat: no-repeat;
+  box-shadow: inset 0 0 40px 6px rgba(185, 122, 42, 0.5);
+
+  animation:
+    activate-flash 0.9s ease-out both,
+    glint 3.2s linear 0.9s infinite,
+    edge-pulse 2.4s ease-in-out 0.9s infinite alternate;
+}
+
+@keyframes activate-flash {
+  from { background-color: rgba(255, 226, 170, 0.85); }
+  to   { background-color: rgba(255, 226, 170, 0); }
+}
+
+@keyframes edge-pulse {
+  from { box-shadow: inset 0 0 30px 4px rgba(185, 122, 42, 0.35); }
+  to   { box-shadow: inset 0 0 60px 12px rgba(185, 122, 42, 0.75); }
+}
+
+/* the inactive panels dim down so the active one stands out */
+.splice-container:has(.is-active) :is(.splice1, .splice2, .splice3):not(.is-active) {
+  filter: brightness(0.55) saturate(0.7);
+}
+
+/* the active label glows brighter */
+.splice1.is-active .splice1-text > p,
+.splice2.is-active .splice2-text > p,
+.splice3.is-active .splice3-text > p {
+  text-shadow: 0 0 6px #ffffff,
+               0 0 14px rgba(255, 174, 0, 1),
+               0 0 28px rgba(255, 140, 0, 0.9);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .splice1.is-active::before,
+  .splice2.is-active::before,
+  .splice3.is-active::before { animation: none; }
+}
+
+/* ---------- slide 1: hero reveal ---------- */
+
+/* hidden while out of view */
+.section:not(.in-view) .game-icon       { opacity: 0; }
+.section:not(.in-view) .game-title      { clip-path: inset(0 50% 0 50%); }
+.section:not(.in-view) .game-enter-base { scale: 0 1; }
+
+/* 1. icon: drops in out of focus, settles, then a ring pulses */
+.section.in-view .game-icon {
+  animation: icon-drop 1s cubic-bezier(0.2, 0.9, 0.2, 1) 0.2s backwards;
+}
+
+@keyframes icon-drop {
+  from { opacity: 0; scale: 1.7; translate: 0 -6vh; filter: blur(8px) brightness(2.5); }
+  to   { opacity: 1; scale: 1;   translate: 0 0;    filter: blur(0) brightness(1); }
+}
+
+.game-icon::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 2px solid var(--color1);
+  border-radius: 10%;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.section.in-view .game-icon::after {
+  animation: icon-ring 3s ease-out 1.6s infinite;
+}
+
+@keyframes icon-ring {
+  0%   { opacity: 0.8; scale: 1; }
+  100% { opacity: 0;   scale: 1.7; }
+}
+
+/* 2. title: opens from the center, flashes, glint sweeps across */
+.section.in-view .game-title {
+  animation: title-open 1s cubic-bezier(0.77, 0, 0.18, 1) 0.6s backwards;
+}
+
+@keyframes title-open {
+  from { clip-path: inset(0 50% 0 50%); filter: brightness(3); }
+  to   { clip-path: inset(0 0 0 0);     filter: brightness(1); }
+}
+
+.game-title::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background-image: linear-gradient(
+    105deg,
+    transparent 40%,
+    rgba(255, 214, 150, 0.5) 50%,
+    transparent 60%
+  );
+  background-size: 300% 100%;
+  background-repeat: no-repeat;
+  background-position: 100% 0;
+}
+
+.section.in-view .game-title::after {
+  animation: glint 1.2s ease-in-out 1.7s backwards;
+}
+
+/* 3. play button: unfolds, then breathes */
+.section.in-view .game-enter-base {
+  animation:
+    play-open 0.7s cubic-bezier(0.2, 0.9, 0.2, 1) 1.2s backwards,
+    play-pulse 2.2s ease-in-out 2s infinite alternate;
+}
+
+@keyframes play-open {
+  from { scale: 0 1; filter: brightness(2.5); }
+  to   { scale: 1 1; filter: brightness(1); }
+}
+
+@keyframes play-pulse {
+  from { box-shadow: 0 0 6px 0 rgba(185, 122, 42, 0.25); }
+  to   { box-shadow: 0 0 26px 6px rgba(185, 122, 42, 0.75); }
+}
+
+/* 4. embers (created by reveal.js) */
+.img1 { position: relative; }
+
+.ember {
+  position: absolute;
+  bottom: 0;
+  left: var(--x);
+  z-index: 0;
+  width: var(--size);
+  height: var(--size);
+  border-radius: 50%;
+  background: radial-gradient(circle, #ffe2aa 0%, var(--color1) 55%, transparent 100%);
+  box-shadow: 0 0 8px 2px rgba(185, 122, 42, 0.7);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.section.in-view .ember {
+  animation: ember-rise var(--dur) ease-in var(--delay) infinite;
+}
+
+@keyframes ember-rise {
+  0%   { opacity: 0;   translate: 0 0; }
+  10%  { opacity: 0.9; }
+  80%  { opacity: 0.6; }
+  100% { opacity: 0;   translate: var(--drift) calc(-1 * var(--rise)); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section:not(.in-view) .game-icon,
+  .section:not(.in-view) .game-title,
+  .section:not(.in-view) .game-enter-base { opacity: 1; clip-path: none; scale: 1 1; }
+  .section.in-view .game-icon,
+  .section.in-view .game-icon::after,
+  .section.in-view .game-title,
+  .section.in-view .game-title::after,
+  .section.in-view .game-enter-base,
+  .section.in-view .ember { animation: none; }
+}
+
+/* ---------- slide 2: neon letter-by-letter title ---------- */
+
+/* steady neon glow on the text itself; the letters inherit it */
+.Main-topic p {
+  text-shadow: 0 0 4px #ffffff,
+               0 0 8px rgba(255, 174, 0, 0.95),
+               0 0 8px rgba(255, 140, 0, 0.8);
+}
+
+/* letters (created by reveal.js) */
+.title-word   { display: inline-block; white-space: nowrap; }
+.title-letter { display: inline-block; }
+
+.section:not(.in-view) .title-letter { opacity: 0; }
+
+/* starts after the title has risen in (0.4s + 0.9s), reuses neon-on from slide 3 */
+.section.in-view .title-letter {
+  animation: neon-on 0.9s linear calc(1.3s + var(--i) * 0.07s) backwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .title-letter { opacity: 1 !important; animation: none !important; }
+}

@@ -1,96 +1,84 @@
-:root{
-    --color1: #B97a2a;
-    --purple: #242124;
-    --grey1: #1C1C1C;
-    --grey2: #323232;
-    --black: #000000;
-    --white: #FFFFFF;
-    --accent-red: #2b0000;
+:root {
+  --color1: #b97a2a;
+  --purple: #242124;
+  --grey1: #1c1c1c;
+  --grey2: #323232;
+  --black: #000000;
+  --white: #ffffff;
+  --accent-red: #2b0000;
 
+  --head-h: 10vh;   /* striped head */
+  --bar-full: 36vh; /* total bar height when the footer is focused */
+
+  /* stripes */
+  --stripe: 20px;                               /* width of one stripe band */
+  --stripe-x: calc(var(--stripe) * 2 * 1.41421356); /* one full pattern, measured horizontally */
+  --stripe-speed: 3s;                           /* time for one pattern to pass */
 }
 
-.border-front-left{
-    position: fixed;
-    z-index: 5;
-    width: 5vw;
-    height: 100vh;
-    left: 0;
+/* ---------- parent ---------- */
+.parent-border {
+  position: fixed;
+  z-index: 5;
+  left: 0;
+  width: 100vw;
 
-    /* border: 1px solid var(--color1); */
+  display: flex;
+  flex-direction: column;
 
-    background: repeating-linear-gradient(
-    45deg,
-    var(--grey1),
-    var(--grey1) 10px,
-    var(--grey2) 10px,
-    var(--grey2) 20px
-);
+  height: var(--head-h); /* collapsed: only the head shows */
+  transition: height 1.2s cubic-bezier(0.77, 0, 0.18, 1) 0.5s; /* opening waits for the line to retract */
 }
 
-.border-front-right{
-    position: fixed;
-    z-index: 5;
-    width: 5vw;
-    height: 100vh;
-    right: 0;
+.parent-border-top { top: 0; }
+.parent-border-bot { bottom: 0; }
 
-    /* border: 1px solid var(--color1); */
-
-    background: repeating-linear-gradient(
-    45deg,
-    var(--grey1),
-    var(--grey1) 10px,
-    var(--grey2) 10px,
-    var(--grey2) 20px
-);
-
+/* ---------- fill (plain grey) ---------- */
+.border-fill {
+  flex: 1;
+  background-color: var(--black);
 }
 
-.border-front-top{
-    position: fixed;
-    z-index: 5;
-    width: 200vw;
-    height: calc(8.9vh + 3px);
-    top: 0;
-    transform: translateX(-5vw);
+/* ---------- head (warning stripes, scrolling) ---------- */
+.border-head {
+  flex: none;
+  height: var(--head-h);
+  box-sizing: border-box;
+  box-shadow: 0 0 40px 10px var(--black) inset;
 
-    /* border: 1px solid var(--color1); */
-    border-bottom: 3px solid var(--black);
-    box-shadow: 0px -0px 40px 10px var(--black) inset;
-
-
-    background: repeating-linear-gradient(
+  background: repeating-linear-gradient(
     45deg,
     var(--grey1),
-    var(--grey1) 20px,
-    var(--grey2) 20px,
-    var(--grey2) 40px
-);
+    var(--grey1) var(--stripe),
+    var(--grey2) var(--stripe),
+    var(--grey2) calc(var(--stripe) * 2)
+  );
+  /* tile = exactly one pattern wide, so the loop is seamless */
+  background-size: var(--stripe-x) 100%;
+  background-repeat: repeat-x;
 
-
-
+  animation: stripe-scroll var(--stripe-speed) linear infinite;
 }
 
+/* bottom head scrolls the opposite way */
+.parent-border-bot .border-head {
+  animation-direction: reverse;
+}
 
-.border-front-bot{
-    position: fixed;
-    z-index: 5;
-    width: 200vw;
-    height: calc(8.9vh + 3px);
-    bottom: 0;
-    transform: translateX(-5vw);
+@keyframes stripe-scroll {
+  from { background-position-x: 0; }
+  to   { background-position-x: var(--stripe-x); }
+}
 
-    /* border: 1px solid var(--color1); */
-    border-top: 1px solid var(--black);
-    box-shadow: 0px -0px 40px 10px var(--black) inset;
+.parent-border-top .border-head { border-bottom: 3px solid var(--black); }
+.parent-border-bot .border-head { border-top: 1px solid var(--black); }
 
+/* ---------- footer in view: bars close in, no delay ---------- */
+body.footer-focus .parent-border {
+  height: var(--bar-full);
+  transition-delay: 0s;
+}
 
-    background: repeating-linear-gradient(
-    45deg,
-    var(--grey1),
-    var(--grey1) 20px,
-    var(--grey2) 20px,
-    var(--grey2) 40px
-);
-
+@media (prefers-reduced-motion: reduce) {
+  .border-head { animation: none; }
 }

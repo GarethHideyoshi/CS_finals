@@ -10,12 +10,21 @@
     <link rel="stylesheet" href="css/grid3.css" />
     <link rel="stylesheet" href="css/headhead.css" />
     <link rel="stylesheet" href="css/border-front.css" />
+        <link rel="stylesheet" href="css/reveal.css" />
   </head>
   <body>
     <!-- <div class="border-front-left"></div>
         <div class="border-front-right"></div> -->
-    <div class="border-front-top"></div>
-    <div class="border-front-bot"></div>
+    <div class="parent-border parent-border-top">
+  <div class="border-fill"></div>
+  <div class="border-head"></div>
+</div>
+<div class="parent-border parent-border-bot">
+  <div class="border-head"></div>
+  <div class="border-fill"></div>
+</div>
+
+<div class="footer-line"></div>
 
     <div class="header">
       <div class="side-warning"></div>
@@ -23,7 +32,7 @@
       <div class="header-middle">
         <a class="header-nav" href="index.html">Home</a>
         <a class="header-nav" href="trailer.html">Trailer</a>
-        <a class="header-nav" href="">Gallery</a>
+        <a class="header-nav" href="gallery.html">Gallery</a>
         <a class="header-nav" href="news.html">News</a>
         <a class="header-nav" href="faq.html">FAQ</a>
       </div>
@@ -95,6 +104,7 @@
 
             <div class="gameplay-video-container">
               <div class="video-inner">
+                <div class="media-cover"></div>
                 <video loop autoplay muted src="img/py-La-office.mp4" id="vid1"></video>
                 <video loop autoplay muted src="img/comm-vid.mp4" id="vid2" hidden></video>
                 <video loop muted autoplay src="img/Screen Recording 2026-11-23 232222 (1).mp4" id="vid3" hidden ></video>
@@ -107,7 +117,9 @@
           <!-- OTHER HALF -->
           <div class="half grid-gameplay-2">
             <div class="gameplay-image">
-              <div class="gameplay-image-inner gameplay-image-img1"></div>
+              <div class="gameplay-image-inner gameplay-image-img1">
+                <div class="media-cover"></div>
+              </div>
             </div>
 
             <div class="gameplay-text" id="">
@@ -155,7 +167,7 @@
               
               <div class="Black-screen">
                 <div class="text-box-cont">
-                    <div class="text-box"><p id="change-text-as">lorem ipsumus</p></div>
+                    <div class="text-box"><p id="change-text-as"></p></div>
                 </div>
               </div>
               
@@ -165,12 +177,27 @@
       </div>
 
       <!-- footer sect -->
-      <div class="section"></div>
+  <div class="section" id="footer-sect">
+  <div class="footer-inner">
+  <a class="icon-box icon-1" href="https://www.roblox.com/games/83253022812373/PURGATORIO"
+    target="_blank">
+    </a>
+  <div class="footer-text"><p>IN ROBLOX</p></div>
+  <a 
+  class="icon-box icon-2" href="https://www.roblox.com/games/83253022812373/PURGATORIO"
+  target="_blank"
+  ></a>
+</div>
+</div>
     </main>
 
 
-    <script src="js/world.js"></script>
-    <script src="js/gameplay.js"></script>
+
+
+<script src="js/world.js"></script>
+<script src="js/gameplay.js"></script>
+<script src="js/reveal.js"></script>
+
 
   </body>
 </html>

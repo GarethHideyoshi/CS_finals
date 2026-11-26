@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Purgatorio - Gallery</title>
+    <link rel="stylesheet" href="css/index.css" />
+    <link rel="stylesheet" href="css/grid.css" />
+    <link rel="stylesheet" href="css/grid2.css" />
+    <link rel="stylesheet" href="css/grid3.css" />
+    <link rel="stylesheet" href="css/headhead.css" />
+    <link rel="stylesheet" href="css/border-front.css" />
+    <link rel="stylesheet" href="css/reveal.css" />
+    <link rel="stylesheet" href="css/gallery.css" />
+  </head>
+  <body>
+    <div class="parent-border parent-border-top">
+      <div class="border-fill"></div>
+      <div class="border-head"></div>
+    </div>
+    <div class="parent-border parent-border-bot">
+      <div class="border-head"></div>
+      <div class="border-fill"></div>
+    </div>
+
+    <div class="header">
+      <div class="header-middle">
+        <a class="header-nav" href="index.html">Home</a>
+        <a class="header-nav" href="trailer.html">Trailer</a>
+        <a class="header-nav" href="gallery.html">Gallery</a>
+        <a class="header-nav" href="news.html">News</a>
+        <a class="header-nav" href="faq.html">FAQ</a>
+      </div>
+    </div>
+
+    <main class="container">
+      <div class="section">
+        <div class="img4 inner-section">
+          <div class="whole grid-world">
+            <div class="page-name-grid2">
+              <div class="page-text2"><p>Gallery</p></div>
+              <div class="line2"></div>
+            </div>
+
+            <div class="gallery-container">
+              <div class="gallery-grid" id="gallery-grid"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- viewer -->
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
+      <button class="lb-btn lb-close" type="button" aria-label="Close">&times;</button>
+      <button class="lb-btn lb-prev" type="button" aria-label="Previous image">&#8249;</button>
+      <img id="lb-img" src="" alt="" />
+      <button class="lb-btn lb-next" type="button" aria-label="Next image">&#8250;</button>
+      <p class="lb-count" id="lb-count"></p>
+    </div>
+
+    <script src="js/gallery.js"></script>
+  </body>
+</html>
